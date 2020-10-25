@@ -6,7 +6,7 @@ const roll = () => {
   return Math.floor(Math.random() * 6) + 1;
 };
 
-//create a dice each one with its button
+//create a dice each one with its own button
 const Dice = (props) => {
   const outerElm = document.createElement('div');
   outerElm.className = 'dice';
@@ -24,14 +24,27 @@ const Dice = (props) => {
   return outerElm;
 };
 
-//append dices to the app elm
-const app = document.querySelector('#app');
 const diceRow = document.querySelector('#dice-row');
-app.appendChild(diceRow);
 
-//create 6 dices
+//create 6 dices in a dice row elm
 let count = 1;
 while (count <= 6) {
   diceRow.appendChild(Dice({ side: roll() }));
   count++;
 }
+
+// add a new dice in a row
+const btnAdd = document.querySelector('#btn-add');
+btnAdd.addEventListener('click', () => {
+  diceRow.appendChild(Dice({ side: roll() }));
+});
+
+// shuffle all dices at once
+const btnShuffle = document.querySelector('#btn-shuffle');
+btnShuffle.addEventListener('click', () => {
+  const dices = document.querySelectorAll('.dice__side');
+  for (let i = 0; i < dices.length; i++) {
+    const diceElm = dices[i];
+    diceElm.className = `dice__side dice__side--${roll()}`;
+  }
+});
