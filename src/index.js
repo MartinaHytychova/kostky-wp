@@ -27,10 +27,9 @@ const Dice = (props) => {
 const diceRow = document.querySelector('#dice-row');
 
 //create 6 dices in a dice row elm
-let count = 1;
-while (count <= 6) {
+
+for (let i = 0; i < 6; i++) {
   diceRow.appendChild(Dice({ side: roll() }));
-  count++;
 }
 
 // add a new dice in a row
@@ -43,8 +42,8 @@ btnAdd.addEventListener('click', () => {
 const btnShuffle = document.querySelector('#btn-shuffle');
 btnShuffle.addEventListener('click', () => {
   const dices = document.querySelectorAll('.dice__side');
-  for (let i = 0; i < dices.length; i++) {
-    const diceElm = dices[i];
+  for (let j = 0; j < dices.length; j++) {
+    const diceElm = dices[j];
     diceElm.className = `dice__side dice__side--${roll()}`;
   }
 });
